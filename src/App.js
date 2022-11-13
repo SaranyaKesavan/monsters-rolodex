@@ -5,32 +5,31 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component{
-constructor(){
-  super();
-  this.state = {
-    monsters: [
-      {
-        name:'Linda',
-        id:'monid001'
-      },
-      {
-        name:'Frank',
-        id:'monid002'
-      },
-      {
-        name:'Jacky',
-        id:'monid003'
-      },
-      {
-        name:'Andrei',
-        id:'monid004'
-      }
-    ]
-    
+  constructor(){
+    super();
+    this.state = {
+      monsters: [],
+    };
+    console.log('1');
   }
-}
+
+  componentDidMount(){
+    console.log('3');
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then((users) => this.setState(
+        () => {
+          return {monsters:users}
+        },
+        () => {
+          console.log(this.state);
+        }
+      )
+    );
+  }
 
   render(){
+    console.log('2');
     return (
       <div className="App">
         {
